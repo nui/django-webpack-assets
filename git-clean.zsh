@@ -1,2 +1,2 @@
 #!/bin/zsh
-git clean -ndx --exclude=.idea/
+git clean -fdx --exclude=.idea/
