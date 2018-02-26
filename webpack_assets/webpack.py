@@ -31,6 +31,11 @@ def _read_bootstrap(assets_json):
     return open(bootstrap_path, 'rt').read()
 
 
+def _read_runtime(assets_json):
+    runtime_path = WEBPACK_ASSETS_DIR.joinpath(assets_json['runtime']['js'])
+    return open(runtime_path, 'rt').read()
+
+
 def _transform_webpack_assets(assets_json):
     assets_json = deepcopy(assets_json)
     for _, chunk in assets_json.items():
@@ -51,4 +56,10 @@ def bootstrap():
     return _read_bootstrap(assets_json)
 
 
-__all__ = ['assets', 'bootstrap']
+@_cache
+def runtime():
+    assets_json = _load_assets_json()
+    return _read_runtime(assets_json)
+
+
+__all__ = ['assets', 'bootstrap', 'runtime']
